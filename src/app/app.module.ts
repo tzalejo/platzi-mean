@@ -1,6 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import {FormsModule} from '@angular/forms';
+import { FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { AppComponent } from './app.component';
 
 // material angular
@@ -24,7 +24,8 @@ import { SigninScreemComponent } from './auth/signin-screen.component';
     BrowserAnimationsModule,
     MaterialModule, // son los modulos de material, lo importamos como dice la documentacion
     MomentModule,
-    FormsModule
+    FormsModule,
+    ReactiveFormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

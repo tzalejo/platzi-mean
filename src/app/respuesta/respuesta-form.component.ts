@@ -15,7 +15,7 @@ export class RespuestaFormComponent {
       form.value.descripcion,
       this.pregunta,
       new Date(),
-      new Usuario('Pablo','Valenzuela')
+      new Usuario(null,null,'Pablo','Valenzuela')
     );
     // agregamos la respuesta al principio con unshift
     this.pregunta.respuesta.unshift(respuesta);
