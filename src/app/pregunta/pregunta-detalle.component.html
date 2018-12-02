@@ -1,4 +1,4 @@
-<mat-card>
+<mat-card class="encabezado-pregunta">
   <mat-card-header>
     <div mat-card-avatar>
       <i md-list-icon class="{{pregunta.icon}} icon" ></i>
@@ -18,34 +18,18 @@
 </mat-card>
 <div class="respuesta">
   <h3>Respuestas</h3>
-  <ul class="respuesta-list" *ngIf="pregunta.respuesta.lenght>0">
-    <li>
-      <h5>Amelie Valenzuela
-        <small>Hace unos segundo</small>
+  <ul class="respuesta-list" *ngIf="pregunta.respuesta.length > 0">
+    <li *ngFor="let respuesta of pregunta.respuesta">
+      <h5>{{respuesta.usuario.primerNombre}} {{respuesta.usuario.segundoNombre}}
+        <small>{{respuesta.fechaCreada | amLocale: 'es' | amTimeAgo }}</small>
       </h5>
-      <p class="descripcion">
-      yo tengo la respuesta
-      </p>
-
+      <p class="descripcion">{{respuesta.descripcion}} </p>
     </li>
-    <li>
-        <h5>Amelie Valenzuela
-          <small>Hace unos segundo</small>
-        </h5>
-        <p class="descripcion">
-          yo tengo la respuesta!
-        </p>
-        
-      </li>
-      <li>
-        <h5>Amelie Valenzuela
-          <small>Hace unos segundo</small>
-        </h5>
-        <p class="descripcion">
-          yo tengo la respuesta!
-        </p>
-      </li>
   </ul>
   <p *ngIf="pregunta.respuesta==0">Se el primero en responder.</p>
-  <app-respuesta-form></app-respuesta-form>
+  <!-- 
+    [pregunta]="pregutna" lo que hace es pasar por parementro al repuesta.componente 
+    la propia pregunta.
+  -->
+  <app-respuesta-form [pregunta]="pregunta" class="respuesta-form"></app-respuesta-form>
 </div>

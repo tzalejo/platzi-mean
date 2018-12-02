@@ -5,12 +5,14 @@
 h2{
   margin: 0;
 }
+
 .respuesta{
   padding: 12px;
 }
 .respuesta-list{
   padding:  0;
   list-style-type: none; /* para quitar las viñetas*/
+  padding-bottom: 160px;
 }
 h5{
   margin-bottom:  0;
@@ -26,5 +28,13 @@ h5 small{
   padding-left: 6px;
   border-left: 2px solid #eee;
   font-size: 14px;
-
+}
+.respuesta-form{
+  position: fixed;
+  bottom:0;
+  right: 0;
+  left: 0;
+  z-index: 2px;
+  background-color: white;
+  border-top: 1px solid #dcdcdc;
 }

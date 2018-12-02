@@ -1,4 +1,4 @@
-import { Pregunta } from "../pregunta/pregunta.module";
+import { Pregunta } from "../pregunta/pregunta.model";
 
 export class Usuario{
   constructor(

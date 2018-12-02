@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Pregunta} from './pregunta.module';
+import { Pregunta} from './pregunta.model';
 @Component({
   selector: 'app-pregunta-detalle',
   templateUrl: './pregunta-detalle.component.html',
