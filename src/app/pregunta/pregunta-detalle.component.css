@@ -1,7 +1,30 @@
 .icon{
   font-size: 38px;
-  
+
 }
 h2{
   margin: 0;
+}
+.respuesta{
+  padding: 12px;
+}
+.respuesta-list{
+  padding:  0;
+  list-style-type: none; /* para quitar las viñetas*/
+}
+h5{
+  margin-bottom:  0;
+}
+h5 small{
+  font-weight: normal;
+  font-size: smaller;
+  color: grey;
+}
+
+.descripcion{
+  margin-top: 6px;
+  padding-left: 6px;
+  border-left: 2px solid #eee;
+  font-size: 14px;
+
 }
