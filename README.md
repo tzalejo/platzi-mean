@@ -1,6 +1,6 @@
 # PlatziOverflow: Curso de Platzi - MEAN .
 # Con material, google fonts-roboto.
-
+# Angular2- moment para trabajo con pipe
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 6.0.0.
 
