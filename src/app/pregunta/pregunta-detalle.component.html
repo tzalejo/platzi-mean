@@ -20,7 +20,7 @@
   <h3>Respuestas</h3>
   <ul class="respuesta-list" *ngIf="pregunta.respuesta.length > 0">
     <li *ngFor="let respuesta of pregunta.respuesta">
-      <h5>{{respuesta.usuario.primerNombre}} {{respuesta.usuario.segundoNombre}}
+      <h5>{{respuesta.usuario.fullNombres()}}
         <small>{{respuesta.fechaCreada | amLocale: 'es' | amTimeAgo }}</small>
       </h5>
       <p class="descripcion">{{respuesta.descripcion}} </p>

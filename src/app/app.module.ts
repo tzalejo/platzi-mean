@@ -4,18 +4,20 @@ import {FormsModule} from '@angular/forms';
 import { AppComponent } from './app.component';
 
 // material angular
-import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MaterialModule } from "./material.module";
 import 'hammerjs';
 import { MomentModule } from 'angular2-moment'; // trabaja con pipe
 // componentes
-import { PreguntaDetalleComponent} from './pregunta/pregunta-detalle.component';
-import {RespuestaFormComponent} from './respuesta/respuesta-form.component';
+import { PreguntaDetalleComponent } from './pregunta/pregunta-detalle.component';
+import { RespuestaFormComponent } from './respuesta/respuesta-form.component';
+import { SigninScreemComponent } from './auth/signin-screen.component';
 @NgModule({
   declarations: [
     AppComponent,
     PreguntaDetalleComponent,
-    RespuestaFormComponent
+    RespuestaFormComponent,
+    SigninScreemComponent
   ],
   imports: [
     BrowserModule,
