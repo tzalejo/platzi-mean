@@ -1,14 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 import {  FormGroup, FormControl, Validators } from '@angular/forms';
-import { Usuario } from './Usuario.model';
+import { Usuario } from '../Usuario.model';
 
 @Component({
   selector: 'app-signin-screem',
-  templateUrl: './signin-screem.component.html',
-  styleUrls: ['./signin-screem.component.css']
+  templateUrl: './signin-screem.component.html'
+  // styleUrls: ['./signin-screem.component.css']
 })
 export class SigninScreemComponent implements OnInit {
-  signinForm : FormGroup // variable de formulario de si mismo..
+  signinForm : FormGroup; // variable de formulario de si mismo..
 
   ngOnInit(){ 
     // validaciones

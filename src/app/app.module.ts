@@ -11,13 +11,15 @@ import { MomentModule } from 'angular2-moment'; // trabaja con pipe
 // componentes
 import { PreguntaDetalleComponent } from './pregunta/pregunta-detalle.component';
 import { RespuestaFormComponent } from './respuesta/respuesta-form.component';
-import { SigninScreemComponent } from './auth/signin-screen.component';
+import { SigninScreemComponent } from './auth/signin/signin-screen.component';
+import { SignUpScreemComponent } from './auth/signup/signup-screem.component';
 @NgModule({
   declarations: [
     AppComponent,
     PreguntaDetalleComponent,
     RespuestaFormComponent,
-    SigninScreemComponent
+    SigninScreemComponent,
+    SignUpScreemComponent
   ],
   imports: [
     BrowserModule,
