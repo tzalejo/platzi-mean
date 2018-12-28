@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {  FormGroup, FormControl, Validators } from '@angular/forms';
+import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Usuario } from '../Usuario.model';
 
 @Component({
@@ -9,7 +9,7 @@ import { Usuario } from '../Usuario.model';
 })
 export class SigninScreemComponent implements OnInit {
   signinForm : FormGroup; // variable de formulario de si mismo..
-
+  
   ngOnInit(){ 
     // validaciones
     this.signinForm = new FormGroup({

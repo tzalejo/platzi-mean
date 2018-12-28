@@ -1,14 +1,13 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormControl, Validators, FormBuilder } from '@angular/forms';
+import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Usuario } from '../Usuario.model';
-import {AbstractControl} from '@angular/forms';
 
 @Component({
   selector: 'app-signup-screem',
   templateUrl: './signup-screem.component.html'
 })
 export class SignUpScreemComponent implements OnInit {
-  signUpForm : FormGroup;
+  signUpForm:FormGroup;
   
   ngOnInit(){
     this.signUpForm  = new FormGroup({
@@ -34,7 +33,6 @@ export class SignUpScreemComponent implements OnInit {
       ])
     });
   }
-
 
   onSubmit(){
     const {nombre,apellido,email,password,confirmar_password} = this.signUpForm.value;

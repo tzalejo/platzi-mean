@@ -22,20 +22,19 @@
             id="email">
     </mat-form-field>
     <mat-form-field>
+      
       <input matInput 
             formControlName="password"
             type="password"
             placeholder="Contraseña"
-            id="password"
-            [formGroup]="form">
+            id="password">
     </mat-form-field>
     <mat-form-field>
       <input matInput 
             formControlName="confirmar_password"
-            type="confirmar_password"
+            type="password"
             placeholder="Confirmar Contraseña"
-            id="confirmar_password"
-            [formGroup]="form">
+            id="confirmar_password">
     </mat-form-field>
     <button type="submit" mat-raised-button color="accent" [disabled]="!signUpForm.valid"  
     onclick="if (password.value !== confirmar_password.value){
