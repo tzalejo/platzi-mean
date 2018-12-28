@@ -9,10 +9,9 @@ import {AbstractControl} from '@angular/forms';
 })
 export class SignUpScreemComponent implements OnInit {
   signUpForm : FormGroup;
-  constructor(fb: FormBuilder) {}
-
+  
   ngOnInit(){
-    this.signUpForm = fb.group({
+    this.signUpForm  = new FormGroup({
       nombre: new FormControl(null,[
         Validators.required,
         Validators.minLength(4)
@@ -28,29 +27,22 @@ export class SignUpScreemComponent implements OnInit {
       password: new FormControl(null,[
         Validators.required,
         Validators.minLength(5)
+      ]),
+      confirmar_password: new FormControl(null,[
+        Validators.required,
+        Validators.minLength(5)
       ])
-    },{
-      validator: SignUpScreemComponent.MatchPassword() 
     });
   }
-  static MatchPassword(AC: AbstractControl) {
-    let password = AC.get('password').value; // to get value in input tag
-    let confirmar_password = AC.get('confirmar_password').value; // to get value in input tag
-     if(password != confirmar_password) {
-         console.log('false');
-         AC.get('confirmar_password').setErrors( {MatchPassword: true} )
-     } else {
-         console.log('true');
-         return null
-     }
- }
+
 
   onSubmit(){
-    if(this.signUpForm.valid){
-      const {nombre,apellido,email,password} = this.signUpForm.value;
+    const {nombre,apellido,email,password,confirmar_password} = this.signUpForm.value;
+    if(this.signUpForm.valid && password === confirmar_password){
       const usuario = new Usuario(email,password,nombre,apellido,);
       console.log(usuario);
     }
   }
+
   
 }

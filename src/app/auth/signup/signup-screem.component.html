@@ -33,9 +33,14 @@
       <input matInput 
             formControlName="confirmar_password"
             type="confirmar_password"
-            placeholder="Contraseña"
+            placeholder="Confirmar Contraseña"
             id="confirmar_password"
             [formGroup]="form">
     </mat-form-field>
-    <button type="submit" mat-raised-button color="accent" [disabled]="!signUpForm.valid"  >Iniciar Sessión</button>
+    <button type="submit" mat-raised-button color="accent" [disabled]="!signUpForm.valid"  
+    onclick="if (password.value !== confirmar_password.value){
+              alert('Las contraseñas no coinciden'); 
+              password.value=''; confirmar_password.value=''; 
+              }"
+    >Crar Cuenta</button>
   </form>
