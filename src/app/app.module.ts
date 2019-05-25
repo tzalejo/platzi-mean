@@ -13,13 +13,15 @@ import { PreguntaDetalleComponent } from './pregunta/pregunta-detalle.component'
 import { RespuestaFormComponent } from './respuesta/respuesta-form.component';
 import { SigninScreemComponent } from './auth/signin/signin-screen.component';
 import { SignUpScreemComponent } from './auth/signup/signup-screem.component';
+import {PreguntaListaComponent} from './pregunta/pregutna-lista.component';
 @NgModule({
   declarations: [
     AppComponent,
     PreguntaDetalleComponent,
     RespuestaFormComponent,
     SigninScreemComponent,
-    SignUpScreemComponent
+    SignUpScreemComponent,
+    PreguntaListaComponent
   ],
   imports: [
     BrowserModule,

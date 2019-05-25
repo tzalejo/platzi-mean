@@ -13,6 +13,7 @@ export class SigninScreemComponent implements OnInit {
   ngOnInit(){ 
     // validaciones
     this.signinForm = new FormGroup({
+      
       email: new FormControl(null,[
         Validators.required,
         Validators.pattern(/^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/)

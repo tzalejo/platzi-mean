@@ -1,7 +1,7 @@
 <mat-card class="encabezado-pregunta">
   <mat-card-header>
     <div mat-card-avatar>
-      <i md-list-icon class="{{pregunta.icon}} icon" ></i>
+      <i md-list-icon class="{{pregunta.icon}} icon"></i>
     </div>
     <mat-card-title>
       <h2>{{pregunta.titulo}}</h2>
@@ -16,9 +16,9 @@
     </p>
   </mat-card-content>
 </mat-card>
-<div class="respuesta">
+<div class="respuestas">
   <h3>Respuestas</h3>
-  <ul class="respuesta-list" *ngIf="pregunta.respuesta.length > 0">
+  <ul class="respuestas-list" *ngIf="pregunta.respuesta.length > 0">
     <li *ngFor="let respuesta of pregunta.respuesta">
       <h5>{{respuesta.usuario.fullNombres()}}
         <small>{{respuesta.fechaCreada | amLocale: 'es' | amTimeAgo }}</small>

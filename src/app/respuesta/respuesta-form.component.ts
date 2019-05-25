@@ -10,6 +10,7 @@ import { Usuario } from '../auth/Usuario.model';
 })
 export class RespuestaFormComponent {
   @Input() pregunta: Pregunta; // viene del pregutna.component como parametro.
+  // ngForm un formulario de typescript
   onSubmit(form: NgForm){
     const respuesta = new Respuesta(
       form.value.descripcion,
@@ -19,6 +20,6 @@ export class RespuestaFormComponent {
     );
     // agregamos la respuesta al principio con unshift
     this.pregunta.respuesta.unshift(respuesta);
-    form.reset();
+    form.reset(); // borramos el formaulario de la respuesta..
   }
 }

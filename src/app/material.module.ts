@@ -1,4 +1,5 @@
-// import {MatButtonModule, MatCheckboxModule} from '@angular/material';
+// esta forma de importar los modulos de material viene de la documentacion de esta..
+
 import { NgModule } from '@angular/core';
 
 import {
@@ -6,7 +7,8 @@ import {
   MatIconModule,
   MatCardModule,
   MatButtonModule,
-  MatInputModule
+  MatInputModule,
+  MatListModule
 } from '@angular/material';
 
 const modules = [
@@ -14,7 +16,8 @@ const modules = [
   MatIconModule,
   MatCardModule,
   MatButtonModule,
-  MatInputModule
+  MatInputModule,
+  MatListModule
 ];
 @NgModule({
   imports: [modules],
