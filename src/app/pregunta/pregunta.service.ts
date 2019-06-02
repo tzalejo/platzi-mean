@@ -12,14 +12,24 @@ export class PreguntaService {
    }
   // el retorno de getPregunta: 
   // el retorno es una promesa que puede ser void(si es un error) o una array de pregunta
-  getPregunta():Promise <void | Pregunta[]> {
+  getPreguntas():Promise <void | Pregunta[]> {
     // el pedido http hacia el baken..con la direccion q esta en environment
     return this.http.get(this.preguntasUrl)
             .toPromise()
             .then(response => response.json() as Pregunta[])// en caso exito
             .catch(this.handleError); // en caso de error
   }
-  handleError(){
 
+  getPregunta(id):Promise<void | Pregunta>{
+    const url = urljoin(environment.apiUrl,id);
+    return this.http.get(url)
+          .toPromise()
+          .then(response => response.json() as Pregunta)
+          .catch(this.handleError);
+  }
+  handleError(err: any){
+    const errMsg = err.message ? err.message :
+      err.status ? `${err.status} - ${err.statusText}` : `Server error`;
+    console.log(errMsg);
   }
 }
