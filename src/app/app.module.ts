@@ -9,11 +9,13 @@ import { MaterialModule } from "./material.module";
 import 'hammerjs';
 import { MomentModule } from 'angular2-moment'; // trabaja con pipe
 // componentes
+import { RespuestaFormComponent }   from './respuesta/respuesta-form.component';
+import { SigninScreemComponent }    from './auth/signin/signin-screen.component';
+import { SignUpScreemComponent }    from './auth/signup/signup-screem.component';
 import { PreguntaDetalleComponent } from './pregunta/pregunta-detalle.component';
-import { RespuestaFormComponent } from './respuesta/respuesta-form.component';
-import { SigninScreemComponent } from './auth/signin/signin-screen.component';
-import { SignUpScreemComponent } from './auth/signup/signup-screem.component';
-import {PreguntaListaComponent} from './pregunta/pregutna-lista.component';
+import { PreguntaListaComponent }   from './pregunta/pregunta-lista.component';
+import { PreguntaFormComponent }    from './pregunta/pregunta-form.component';
+import {RoutingModule} from './app.routing'
 @NgModule({
   declarations: [
     AppComponent,
@@ -21,7 +23,8 @@ import {PreguntaListaComponent} from './pregunta/pregutna-lista.component';
     RespuestaFormComponent,
     SigninScreemComponent,
     SignUpScreemComponent,
-    PreguntaListaComponent
+    PreguntaListaComponent,
+    PreguntaFormComponent
   ],
   imports: [
     BrowserModule,
@@ -29,7 +32,8 @@ import {PreguntaListaComponent} from './pregunta/pregutna-lista.component';
     MaterialModule, // son los modulos de material, lo importamos como dice la documentacion
     MomentModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    RoutingModule
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -18,8 +18,8 @@ export class RespuestaFormComponent {
       new Date(),
       new Usuario(null,null,'Pablo','Valenzuela')
     );
-    // agregamos la respuesta al principio con unshift
-    this.pregunta.respuesta.unshift(respuesta);
+    // this.pregunta.respuesta.push(respuesta); inserta al final de la lista..
+    this.pregunta.respuesta.unshift(respuesta); // inserta la respuesta al principio  de la lista
     form.reset(); // borramos el formaulario de la respuesta..
   }
 }

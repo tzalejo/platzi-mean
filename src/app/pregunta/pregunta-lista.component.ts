@@ -19,10 +19,15 @@ const p = new Pregunta(
       padding: 0 !important;
       font-size: 40px !important;
     }
+    .agregar-pregunta {
+      position: fixed;
+      bottom:30px;
+      right:30px;
+      font-size:30px;
+    }
   `]
 })
 export class PreguntaListaComponent implements OnInit {
-  preguntas: Pregunta[] = new Array(10).fill(p);
-
+  preguntas: Pregunta[] = new Array(5).fill(p);
   ngOnInit(): void { }
 }

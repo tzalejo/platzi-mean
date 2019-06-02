@@ -1,5 +1,5 @@
 <mat-list>
-  <mat-list-item *ngFor="let pregunta of preguntas">
+  <mat-list-item  *ngFor="let pregunta of preguntas" [routerLink]="['pregunta',pregunta._id]">
     <i *ngIf="pregunta.icon == 'none'" mat-list-icon class="material-icons help">help</i>
     <i *ngIf="pregunta.icon != 'none'" mat-list-icon class="{{pregunta.icon}}"></i>
     <h3 mat-line>{{pregunta.titulo}}</h3>
@@ -8,3 +8,4 @@
     </p>
   </mat-list-item>
 </mat-list>
+<button class="agregar-pregunta" mat-fab color="accent" [routerLink]="['pregunta/nueva']" routerLinkActive="router-link-active" >+</button>

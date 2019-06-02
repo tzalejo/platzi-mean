@@ -1,9 +1,8 @@
 <mat-toolbar color="primary">
-  <span>Platzi - Overflow</span>
+  <span [routerLink]="['/']">Platzi - Overflow</span>
   <span class="spacer"></span>
-  <mat-icon>account_circle</mat-icon>
+  <mat-icon [routerLink]="['/signin']" >account_circle</mat-icon>
 </mat-toolbar>
-<!-- <app-pregunta-detalle></app-pregunta-detalle> -->
-<!-- <app-signin-screem></app-signin-screem>  -->
-<!-- <app-signup-screem></app-signup-screem> -->
-<app-pregunta-lista></app-pregunta-lista>
+
+<router-outlet></router-outlet>
+
