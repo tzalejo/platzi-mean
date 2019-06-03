@@ -3,29 +3,37 @@ import { Pregunta } from './pregunta.model';
 import { Http} from '@angular/http';
 import { environment} from '../../environments/environment';
 import urljoin from 'url-join';
-import 'rxjs/add/operator/toPromise'; // el modulo para toPromise
+
+import { map } from 'rxjs/operators';
+import { Observable } from 'rxjs';
+// ES6 Modules or TypeScript, para mostrar cartel de errores.
+import * as Rx from 'rxjs';
 @Injectable()
 export class PreguntaService {
   private preguntasUrl: string;
   constructor(private http:Http){
-    this.preguntasUrl = urljoin(environment.apiUrl,'pregunta');
+    this.preguntasUrl = urljoin(environment.apiUrl,'preguntas');
    }
   // el retorno de getPregunta: 
   // el retorno es una promesa que puede ser void(si es un error) o una array de pregunta
-  getPreguntas():Promise <void | Pregunta[]> {
-    // el pedido http hacia el baken..con la direccion q esta en environment
+  getPreguntas() {
+    // el pedido http hacia el backend..con la direccion q esta en environment
     return this.http.get(this.preguntasUrl)
-            .toPromise()
-            .then(response => response.json() as Pregunta[])// en caso exito
-            .catch(this.handleError); // en caso de error
+            .pipe(
+              map(respuestas => {
+                return respuestas.json() as Pregunta[];
+              })
+            )
   }
 
-  getPregunta(id):Promise<void | Pregunta>{
+  getPregunta(id){
     const url = urljoin(environment.apiUrl,id);
     return this.http.get(url)
-          .toPromise()
-          .then(response => response.json() as Pregunta)
-          .catch(this.handleError);
+          .pipe(
+            map(respuesta => {
+              return respuesta.json() as Pregunta;
+            })
+          );
   }
   handleError(err: any){
     const errMsg = err.message ? err.message :

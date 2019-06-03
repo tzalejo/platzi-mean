@@ -3,6 +3,9 @@ import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { AppComponent } from './app.component';
 
+import { HttpClientModule } from '@angular/common/http'; 
+import { HttpModule } from '@angular/http';
+
 // material angular
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MaterialModule } from "./material.module";
@@ -33,7 +36,7 @@ import {RoutingModule} from './app.routing'
     MomentModule,
     FormsModule,
     ReactiveFormsModule,
-    RoutingModule
+    RoutingModule,HttpClientModule,HttpModule
   ],
   providers: [],
   bootstrap: [AppComponent]

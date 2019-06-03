@@ -1,11 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { Pregunta } from './pregunta.model';
+import { PreguntaService } from './pregunta.service';
 
-const p = new Pregunta(
-  'Como reutilizo un componente de angular',
-  'Miren, esta es mi pregunta',
-  new Date(),
-  'none');
+import { Observable } from 'rxjs';
+// ES6 Modules or TypeScript, para mostrar cartel de errores.
+import * as Rx from 'rxjs';
 @Component({
   selector: 'app-pregunta-lista',
   templateUrl: './pregunta-lista.component.html',
@@ -25,9 +24,22 @@ const p = new Pregunta(
       right:30px;
       font-size:30px;
     }
-  `]
+  `],
+  providers:[PreguntaService]
 })
 export class PreguntaListaComponent implements OnInit {
-  preguntas: Pregunta[] = new Array(5).fill(p);
-  ngOnInit(): void { }
+  private loading : boolean;
+  private preguntas: Pregunta[];
+  constructor(private preguntaServicio: PreguntaService){
+    this.preguntas=[];
+    this.loading = true; //tipo bandera para indicar si estamos cargando los datos del backend
+  }
+  // cuando se monte este componente en pantalla, vamos a pedir las preguntas
+  ngOnInit(){
+    this.preguntaServicio.getPreguntas()
+      .subscribe((preguntas: Pregunta[])=>{
+        this.preguntas = preguntas;
+      },this.preguntaServicio.handleError);
+
+  }
 }
