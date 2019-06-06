@@ -1,13 +1,12 @@
 import { Injectable } from '@angular/core';
 import { Pregunta } from './pregunta.model';
-import { Http} from '@angular/http';
-import { environment} from '../../environments/environment';
+import { Http, Headers, Response } from '@angular/http';
+import { environment } from '../../environments/environment';
 import urljoin from 'url-join';
 
-import { map } from 'rxjs/operators';
+import { map, catchError } from 'rxjs/operators';
 import { Observable } from 'rxjs';
-// ES6 Modules or TypeScript, para mostrar cartel de errores.
-import * as Rx from 'rxjs';
+
 @Injectable()
 export class PreguntaService {
   private preguntasUrl: string;
@@ -27,13 +26,29 @@ export class PreguntaService {
   }
 
   getPregunta(id){
-    const url = urljoin(environment.apiUrl,id);
+    const url = urljoin(this.preguntasUrl,id);
+    // console.log('Url en el servicio',url)
     return this.http.get(url)
           .pipe(
-            map(respuesta => {
-              return respuesta.json() as Pregunta;
+            map(pregunta => {
+              // console.log('En el SErvicio',pregunta)
+              return pregunta.json() as Pregunta;
             })
           );
+  }
+  addPregunta(pregunta: Pregunta){
+    // generar un string a partir de un modelo, pregunta.
+    const body = JSON.stringify(pregunta);
+    console.log(body);
+    
+    // configuramo para que el servidor reciba un objeto en formato json..
+    const headers = new Headers({ 'Content-type': 'application/json' });
+
+    return this.http.post(this.preguntasUrl,body,{headers})
+            .pipe(
+              map((response: Response)=>response.json()),
+              catchError((error: Response)=>Observable.throw(error.json()))
+            )
   }
   handleError(err: any){
     const errMsg = err.message ? err.message :

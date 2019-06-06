@@ -18,7 +18,7 @@ const ROUTES: Routes = [
   // pregunta -> preguntalista
   //pregutna/id -> pregntaDetalle
   //pregutna/nueva -> pantalla de creacion de pregunta..
-  { path: 'pregunta', children: PREGUNTA_ROUTES },
+  { path: 'preguntas', children: PREGUNTA_ROUTES },
   
   // { path: '**', component: PageNotFoundComponent },
 

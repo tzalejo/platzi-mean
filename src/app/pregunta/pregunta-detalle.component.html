@@ -1,35 +1,35 @@
 <mat-card class="encabezado-pregunta">
   <mat-card-header>
     <div mat-card-avatar>
-      <i md-list-icon class="{{pregunta.icon}} icon"></i>
+      <i md-list-icon class="{{pregunta?.icon}} icon"></i>
     </div>
     <mat-card-title>
-      <h2>{{pregunta.titulo}}</h2>
+      <h2>{{pregunta?.titulo}}</h2>
     </mat-card-title>
     <mat-card-subtitle>
-      <small>Alejo - {{pregunta.createAd | amLocale: 'es' | amTimeAgo }}</small>
+      <small>Alejo - {{pregunta?.createAd | amLocale: 'es' | amTimeAgo }}</small>
     </mat-card-subtitle>
   </mat-card-header>
   <mat-card-content>
     <p>
-      {{pregunta.descripcion}}
+      {{pregunta?.descripcion}}
     </p>
   </mat-card-content>
 </mat-card>
-<div class="respuestas">
+<div class="respuestas" >
   <h3>Respuestas</h3>
-  <ul class="respuestas-list" *ngIf="pregunta.respuesta.length > 0">
-    <li *ngFor="let respuesta of pregunta.respuesta">
+  <ul class="respuestas-list" *ngIf="pregunta?.respuesta.length > 0">
+    <li *ngFor="let respuesta of pregunta?.respuesta">
       <h5>{{respuesta.usuario.fullNombres()}}
         <small>{{respuesta.fechaCreada | amLocale: 'es' | amTimeAgo }}</small>
       </h5>
       <p class="descripcion">{{respuesta.descripcion}} </p>
     </li>
   </ul>
-  <p *ngIf="pregunta.respuesta==0">Se el primero en responder.</p>
+  <p *ngIf="pregunta?.respuesta.length==0">Se el primero en responder.</p>
   <!-- 
     [pregunta]="pregutna" lo que hace es pasar por parementro al repuesta.componente 
-    la propia pregunta.
+    la propia pregunta?.
   -->
   <app-respuesta-form [pregunta]="pregunta" class="respuesta-form"></app-respuesta-form>
 </div>

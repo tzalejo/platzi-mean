@@ -1,6 +1,11 @@
 import express from 'express';
+import bodyParser  from 'body-parser';
 import { pregunta } from './routes';
 const app = express();
+
+// para poder leer todo lo q  venga en formato json desde el cliente..
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({extended: true}));// para q nuestro servidor pueda leer todo lo q venga en utf-8
 
 // si estemos en un entorno de desarrollo
 // node_env indica en que entonrno estamos

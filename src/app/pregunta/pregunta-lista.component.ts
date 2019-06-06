@@ -2,9 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { Pregunta } from './pregunta.model';
 import { PreguntaService } from './pregunta.service';
 
-import { Observable } from 'rxjs';
-// ES6 Modules or TypeScript, para mostrar cartel de errores.
-import * as Rx from 'rxjs';
 @Component({
   selector: 'app-pregunta-lista',
   templateUrl: './pregunta-lista.component.html',
@@ -24,6 +21,9 @@ import * as Rx from 'rxjs';
       right:30px;
       font-size:30px;
     }
+    .loading-spinner{
+      position:fixed
+    }
   `],
   providers:[PreguntaService]
 })
@@ -39,6 +39,7 @@ export class PreguntaListaComponent implements OnInit {
     this.preguntaServicio.getPreguntas()
       .subscribe((preguntas: Pregunta[])=>{
         this.preguntas = preguntas;
+        this.loading=false;
       },this.preguntaServicio.handleError);
 
   }

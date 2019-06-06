@@ -1,11 +1,15 @@
-<mat-list>
-  <mat-list-item  *ngFor="let pregunta of preguntas" [routerLink]="['pregunta',pregunta._id]">
-    <i *ngIf="pregunta.icon == 'none'" mat-list-icon class="material-icons help">help</i>
-    <i *ngIf="pregunta.icon != 'none'" mat-list-icon class="{{pregunta.icon}}"></i>
-    <h3 mat-line>{{pregunta.titulo}}</h3>
-    <p mat-line>
-      <small>{{pregunta.respuesta.length}} respuestas - {{pregunta.fechaCreada | amLocale: 'es' | amTimeAgo }}</small>
-    </p>
-  </mat-list-item>
-</mat-list>
-<button class="agregar-pregunta" mat-fab color="accent" [routerLink]="['pregunta/nueva']" routerLinkActive="router-link-active" >+</button>
+<mat-spinner *ngIf="loading" class="loading-spinner"></mat-spinner>
+<div *ngIf="!loading">
+  <mat-list>
+    <mat-list-item  *ngFor="let pregunta of preguntas" [routerLink]="['preguntas',pregunta._id]">
+      <i *ngIf="pregunta.icon == 'none'" mat-list-icon class="material-icons help">help</i>
+      <i *ngIf="pregunta.icon != 'none'" mat-list-icon class="{{pregunta.icon}}"></i>
+      <h3 mat-line>{{pregunta.titulo}}</h3>
+      <p mat-line>
+        <small>{{pregunta.respuesta.length}} respuestas - {{pregunta.fechaCreada | amLocale: 'es' | amTimeAgo }}</small>
+      </p>
+    </mat-list-item>
+  </mat-list>
+  <button class="agregar-pregunta" mat-fab color="accent" [routerLink]="['pregunta/nueva']" routerLinkActive="router-link-active" >+</button>
+</div>
+  

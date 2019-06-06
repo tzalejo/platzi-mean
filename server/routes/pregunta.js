@@ -19,12 +19,32 @@ const pregunta = {
 
 const preguntas = new Array(10).fill(pregunta);
 
-// cuando sea api/preguntas
+// GET api/preguntas
 app.get('/',(req,res)=>{
-  res.status(200).json(preguntas);
+    res.status(200).json(preguntas);
 });
 
-//cuando se api/preguntas/:id
-app.get('/:id',(req,res)=>res.status(200).json(pregunta));
+// GET api/preguntas/:id
+app.get('/:id',(req,res)=>{
+  const { id } = req.params;
+  const preg = preguntas.find(({_id}) => _id === +id) // +id : lo que hace es convertirlo en numero
+  res.status(200).json(preg)
 
+});
+
+// POST api/preguntas/
+app.post('/',(req,res)=>{
+  const pregunta = req.body;
+  pregunta._id = +new Date();
+  pregunta.usuario ={
+    email: 'tzalejo@gmail.com',
+    password : '1234',
+    nombre: 'alejandro',
+    apellido: 'valenzuela'
+  }
+  pregunta.fechaCreada = new Date();
+  pregunta.respuesta = [];
+  preguntas.push(pregunta);
+  res.status(200).json(pregunta);
+}) 
 export default app;
