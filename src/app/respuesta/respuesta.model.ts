@@ -1,5 +1,5 @@
 import { Pregunta } from "../pregunta/pregunta.model";
-import{ Usuario} from '../auth/Usuario.model';
+import { Usuario } from '../auth/Usuario.model';
 
 export class Respuesta {
   constructor(

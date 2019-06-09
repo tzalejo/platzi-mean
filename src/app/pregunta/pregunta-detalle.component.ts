@@ -23,12 +23,14 @@ export class PreguntaDetalleComponent implements OnInit{
     this.id = this.router.snapshot.params['id'];
     // console.log(this.id);
     this.preguntaService.getPregunta(this.id)
-      .subscribe((pregunta: Pregunta) => {
+      .subscribe(
+        (pregunta: Pregunta) => {
         // console.log(pregunta);
         this.pregunta=pregunta;
         
         this.loading= false;
-      },this.preguntaService.handleError)
+      },this.preguntaService.handleError
+      )
   }
   ngOnDestroy(){
 

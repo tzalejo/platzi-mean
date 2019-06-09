@@ -6,7 +6,7 @@ import urljoin from 'url-join';
 
 import { map, catchError } from 'rxjs/operators';
 import { Observable } from 'rxjs';
-
+import { Respuesta } from  '../respuesta/respuesta.model';
 @Injectable()
 export class PreguntaService {
   private preguntasUrl: string;
@@ -45,6 +45,31 @@ export class PreguntaService {
     const headers = new Headers({ 'Content-type': 'application/json' });
 
     return this.http.post(this.preguntasUrl,body,{headers})
+            .pipe(
+              map((response: Response)=>response.json()),
+              catchError((error: Response)=>Observable.throw(error.json()))
+            )
+  }
+  addRespuesta(respuesta: Respuesta){
+
+    // para no enviar todo el objeto de respuesta, solo seleccionamos cierta info
+    const a ={
+      descripcion: respuesta.descripcion,
+      pregunta: {
+        _id: respuesta.pregunta._id
+      }
+    }
+
+    // generar un string a partir de un modelo, respuesta. Modificamos para q solo envie lo q esta arriba y no toda la info
+    const body = JSON.stringify(a);
+    
+    // api/preguntas/:id/respuestas
+    const url = urljoin(this.preguntasUrl,respuesta.pregunta._id.toString(),'respuestas'); //this.preguntasUrl +'/'+respuesta.pregunta._id+'/respuestas'; 
+  
+    // configuramo para que el servidor reciba un objeto en formato json..
+    const headers = new Headers({ 'Content-type': 'application/json' });
+    
+    return this.http.post(url,body,{headers})
             .pipe(
               map((response: Response)=>response.json()),
               catchError((error: Response)=>Observable.throw(error.json()))

@@ -17,16 +17,16 @@
   </mat-card-content>
 </mat-card>
 <div class="respuestas" >
-  <h3>Respuestas</h3>
-  <ul class="respuestas-list" *ngIf="pregunta?.respuesta.length > 0">
-    <li *ngFor="let respuesta of pregunta?.respuesta">
-      <h5>{{respuesta.usuario.fullNombres()}}
+  <h3 id="titulo">Respuestas</h3>
+  <ul class="respuestas-list" *ngIf="pregunta?.respuestas.length > 0">
+    <li *ngFor="let respuesta of pregunta?.respuestas">
+      <h5>{{respuesta.usuario.nombre}}  {{respuesta.usuario.apellido}} 
         <small>{{respuesta.fechaCreada | amLocale: 'es' | amTimeAgo }}</small>
       </h5>
       <p class="descripcion">{{respuesta.descripcion}} </p>
     </li>
   </ul>
-  <p *ngIf="pregunta?.respuesta.length==0">Se el primero en responder.</p>
+  <p *ngIf="pregunta?.respuestas.length==0">Se el primero en responder.</p>
   <!-- 
     [pregunta]="pregutna" lo que hace es pasar por parementro al repuesta.componente 
     la propia pregunta?.

@@ -7,18 +7,18 @@ export class Pregunta{
   descripcion: string;
   fechaCreada?: Date;
   icon?: string;
-  respuesta: Respuesta[];
+  respuestas: Respuesta[];
   constructor(
     titulo: string,
     descripcion: string,
     fechaCreada?:Date,
     icon?:string
   ){
-    this._id ='1';
+    this._id = '2';
     this.titulo=titulo;
     this.descripcion= descripcion;
     this.fechaCreada = fechaCreada;
     this.icon = icon;
-    this.respuesta=[];
+    this.respuestas=[];
   }
 }
