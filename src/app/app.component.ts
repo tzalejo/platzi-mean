@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-
+import { AuthService } from './auth/auth.services';
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -7,4 +7,18 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'app';
+  constructor(private authService: AuthService ){}
+  
+  estaLogueado(){
+    return this.authService.estaLogueado();
+  }
+
+  fullNombres(){
+    return this.authService.clienteActual.fullNombres();
+  }
+
+  logout(){
+    this.authService.logout();
+  }
+
 }

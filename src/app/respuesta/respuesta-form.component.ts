@@ -7,7 +7,9 @@ import { Pregunta } from '../pregunta/pregunta.model';
 import { PreguntaService } from '../pregunta/pregunta.service';
 
 // para hace una navegacion con sroll
-// import SweetScroll from 'sweet-scroll/decls';c
+import * as SmoothScroll from 'smooth-scroll';
+
+
 @Component({
   selector:'app-respuesta-form',
   templateUrl: './respuesta-form.component.html',
@@ -15,14 +17,14 @@ import { PreguntaService } from '../pregunta/pregunta.service';
   providers:[PreguntaService]
 })
 export class RespuestaFormComponent {
-  @Input() pregunta: Pregunta; // viene del pregutna.component como parametro.
   // ngForm un formulario de typescript
-  // sweetScroll : SweetScroll;
+  @Input() pregunta: Pregunta; // viene del pregutna.component como parametro.
+  smoothScroll: SmoothScroll;
   
   // inyecto los servicios
   constructor(private preguntaServicio: PreguntaService){
     // inicializamos sweet
-    // this.sweetScroll = new SweetScroll();
+      this.smoothScroll= new SmoothScroll();
   }
   onSubmit(form: NgForm){
     const respuesta = new Respuesta(
@@ -35,7 +37,10 @@ export class RespuestaFormComponent {
       .subscribe(
         resp=> {
           this.pregunta.respuestas.unshift(resp);
-          // this.sweetScroll.to('#titulo');
+          // para navegar con el scroll..al insertar un respuesta a una pregutna...me redireje hacia dnd esta 
+          // id= titulo-respuestas 
+          const anchor = document.querySelector('#titulo-respuestas');
+          this.smoothScroll.animateScroll(anchor);
         },// this.pregunta.respuesta.push(respuesta); inserta al final de la lista.. 
           this.preguntaServicio.handleError
       );

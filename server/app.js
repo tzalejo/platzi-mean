@@ -1,6 +1,6 @@
 import express from 'express';
 import bodyParser  from 'body-parser';
-import { pregunta } from './routes';
+import { pregunta,auth } from './routes';
 const app = express();
 
 // para poder leer todo lo q  venga en formato json desde el cliente..
@@ -17,8 +17,9 @@ if (process.env.NODE_ENV==='development'){
     res.setHeader('Access-Control-Allow-Headers', 'Origin, X-Request-With, Content-Type, Accept');
     res.setHeader('Access-Control-Allow-Methods', 'POST, GET, PATCH, DELETE, OPTIONS');
     next();
-  })
+  });
 }
 app.use('/api/preguntas',pregunta);
+app.use('/api/auth',auth);
 
 export default app;

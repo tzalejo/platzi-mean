@@ -2,14 +2,16 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Usuario } from '../Usuario.model';
 
+import {AuthService} from '../auth.services';
 @Component({
   selector: 'app-signin-screem',
   templateUrl: './signin-screem.component.html'
-  // styleUrls: ['./signin-screem.component.css']
 })
 export class SigninScreemComponent implements OnInit {
   signinForm : FormGroup; // variable de formulario de si mismo..
   
+  constructor(private authService : AuthService){}
+
   ngOnInit(){ 
     // validaciones
     this.signinForm = new FormGroup({
@@ -27,7 +29,13 @@ export class SigninScreemComponent implements OnInit {
     if(this.signinForm.valid){
       const {email, password} = this.signinForm.value;
       const usuario = new Usuario(email,password);
-      console.log(usuario);
+      // console.log(usuario); 
+      this.authService.signin(usuario)
+        .subscribe(
+          this.authService.login,
+          // this.authService.handleError
+          err => console.log(err)
+        );
     }
   }
 }

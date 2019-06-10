@@ -1,4 +1,4 @@
-<mat-card class="encabezado-pregunta">
+<mat-card  class="encabezado-pregunta">
   <mat-card-header>
     <div mat-card-avatar>
       <i md-list-icon class="{{pregunta?.icon}} icon"></i>
@@ -17,7 +17,7 @@
   </mat-card-content>
 </mat-card>
 <div class="respuestas" >
-  <h3 id="titulo">Respuestas</h3>
+  <h3 >Respuestas</h3>
   <ul class="respuestas-list" *ngIf="pregunta?.respuestas.length > 0">
     <li *ngFor="let respuesta of pregunta?.respuestas">
       <h5>{{respuesta.usuario.nombre}}  {{respuesta.usuario.apellido}} 
