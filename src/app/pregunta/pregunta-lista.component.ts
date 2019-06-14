@@ -40,7 +40,7 @@ export class PreguntaListaComponent implements OnInit {
       .subscribe((preguntas: Pregunta[])=>{
         this.preguntas = preguntas;
         this.loading=false;
-      },this.preguntaServicio.handleError);
+      });
 
   }
 }

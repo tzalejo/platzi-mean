@@ -1,28 +1,11 @@
 import express from 'express';
 import Debug from 'debug';
-import jwt from 'jsonwebtoken';
+import { findUsuarioByEmail ,crearToken, usuarios } from '../middleware/index';
 
 const app = express.Router();
-const debug = new Debug('platzi-overflow:auth');
+const debug = new Debug('platzi-overflow:routes/auth');
 
-const secreta  = 'miclave';
-
-const usuarios = [
-  {
-  nombre:'Alejandro',
-  apellido: 'Valenzuela',
-  email: 'tzalejo@gmail.com',
-  password:'1234',
-  _id :123
-}
-]
-
-// function findUsuarioByEmail(email){
-//   return usuarios.find(usuario => usuario.email === email);
-// }
-
-
-
+// logueo
 app.post('/signin',(req,res,next)=>{
   // cuando nos registremos, del body obtendremos el email y pass
   const {email, password}  = req.body;
@@ -52,6 +35,7 @@ app.post('/signin',(req,res,next)=>{
   })
 });
 
+// registro
 // POST /api/auth/signup para salvar usuario..
 app.post('/signup',(req,res)=>{
   // los parametro q me envias desde formulario de creacion, desde signup
@@ -81,10 +65,6 @@ app.post('/signup',(req,res)=>{
   });
 });
 
-// creamos el token
-const  crearToken = (usuario)=> jwt.sign({usuario},secreta ,{expiresIn:86400});
-// buscamos el usuario via email
-const findUsuarioByEmail = e => usuarios.find(({email}) => email === e );
 
 // compara pass,passcliente es la q ingreso el usuario y passUsu es la q realmente es.
 function comparaPassword(passwordCliente,passwordUsuario){

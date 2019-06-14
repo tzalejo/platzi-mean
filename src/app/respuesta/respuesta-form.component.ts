@@ -1,5 +1,6 @@
-import { Component, Input} from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
+import { Router } from '@angular/router';
 import { Respuesta} from './respuesta.model';
 import { Pregunta } from '../pregunta/pregunta.model';
 // import { Usuario } from '../auth/Usuario.model';
@@ -9,6 +10,7 @@ import { PreguntaService } from '../pregunta/pregunta.service';
 // para hace una navegacion con sroll
 import * as SmoothScroll from 'smooth-scroll';
 
+import { AuthService } from '../auth/auth.services';
 
 @Component({
   selector:'app-respuesta-form',
@@ -16,17 +18,31 @@ import * as SmoothScroll from 'smooth-scroll';
   styleUrls:['./respuesta-form.component.css'],
   providers:[PreguntaService]
 })
-export class RespuestaFormComponent {
+export class RespuestaFormComponent implements OnInit{
   // ngForm un formulario de typescript
   @Input() pregunta: Pregunta; // viene del pregutna.component como parametro.
   smoothScroll: SmoothScroll;
   
   // inyecto los servicios
-  constructor(private preguntaServicio: PreguntaService){
+  constructor(
+    private authService:  AuthService,
+    private preguntaServicio: PreguntaService,
+    private router : Router
+    ){
     // inicializamos sweet
       this.smoothScroll= new SmoothScroll();
   }
+
+  ngOnInit(){
+
+  }
   onSubmit(form: NgForm){
+    // verifico si esta logueado..
+    if (!this.authService.estaLogueado()){
+      console.log('no esta logueado');
+      this.router.navigateByUrl('/signin');
+    }
+
     const respuesta = new Respuesta(
       form.value.descripcion,
       this.pregunta
@@ -41,9 +57,9 @@ export class RespuestaFormComponent {
           // id= titulo-respuestas 
           const anchor = document.querySelector('#titulo-respuestas');
           this.smoothScroll.animateScroll(anchor);
-        },// this.pregunta.respuesta.push(respuesta); inserta al final de la lista.. 
-          this.preguntaServicio.handleError
-      );
+          // this.pregunta.respuesta.push(respuesta); inserta al final de la lista.. 
+        },
+        this.authService.handleError);
     // inserta la respuesta al principio de la lista
     form.reset(); // borramos el formaulario de la respuesta..
   }

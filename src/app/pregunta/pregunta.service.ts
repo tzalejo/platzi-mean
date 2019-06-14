@@ -3,10 +3,10 @@ import { Pregunta } from './pregunta.model';
 import { Http, Headers, Response } from '@angular/http';
 import { environment } from '../../environments/environment';
 import urljoin from 'url-join';
-
-import { map, catchError } from 'rxjs/operators';
-import { Observable } from 'rxjs';
+import { map} from 'rxjs/operators';
 import { Respuesta } from  '../respuesta/respuesta.model';
+
+
 @Injectable()
 export class PreguntaService {
   private preguntasUrl: string;
@@ -18,37 +18,36 @@ export class PreguntaService {
   getPreguntas() {
     // el pedido http hacia el backend..con la direccion q esta en environment
     return this.http.get(this.preguntasUrl)
-            .pipe(
-              map(respuestas => {
-                return respuestas.json() as Pregunta[];
-              })
-            )
+      .pipe(
+        map(respuestas => {
+          return respuestas.json() as Pregunta[];
+        })
+      )
   }
 
   getPregunta(id){
     const url = urljoin(this.preguntasUrl,id);
     // console.log('Url en el servicio',url)
     return this.http.get(url)
-          .pipe(
-            map(pregunta => {
-              // console.log('En el SErvicio',pregunta)
-              return pregunta.json() as Pregunta;
-            })
-          );
+      .pipe(
+        map(pregunta => {
+          // console.log('En el SErvicio',pregunta)
+          return pregunta.json() as Pregunta;
+        })
+      );
   }
   addPregunta(pregunta: Pregunta){
     // generar un string a partir de un modelo, pregunta.
     const body = JSON.stringify(pregunta);
-    console.log(body);
     
     // configuramo para que el servidor reciba un objeto en formato json..
     const headers = new Headers({ 'Content-type': 'application/json' });
 
-    return this.http.post(this.preguntasUrl,body,{headers})
-            .pipe(
-              map((response: Response)=>response.json()),
-              catchError((error: Response)=>Observable.throw(error.json()))
-            )
+    const token = this.obtenerToken();
+    return this.http.post(this.preguntasUrl+token,body,{headers})
+      .pipe(
+        map((response: Response)=>response.json())
+      )
   }
   addRespuesta(respuesta: Respuesta){
 
@@ -69,15 +68,20 @@ export class PreguntaService {
     // configuramo para que el servidor reciba un objeto en formato json..
     const headers = new Headers({ 'Content-type': 'application/json' });
     
-    return this.http.post(url,body,{headers})
-            .pipe(
-              map((response: Response)=>response.json()),
-              catchError((error: Response)=>Observable.throw(error.json()))
-            )
+    const token = this.obtenerToken();
+    return this.http.post(url+token,body,{headers})
+      .pipe(
+        map((response: Response)=>response.json())
+      )
   }
-  handleError(err: any){
-    const errMsg = err.message ? err.message :
-      err.status ? `${err.status} - ${err.statusText}` : `Server error`;
-    console.log(errMsg);
+  handleError(error: any ) {
+    const errMsg = error.message ? error.message : error.status ? `${error.status} - ${error.statusText}` : 'Server error'; 
+    console.log('Error  pregunta.services',errMsg);
+  }
+  obtenerToken(){
+    // es el token generado al loguearse un usuario
+    const token = localStorage.getItem('token');
+    // devolvemos 
+    return `?token=${token}` ;
   }
 }

@@ -6,6 +6,7 @@ import {PreguntaService} from './pregunta.service';
 
 // para navegar
 import {Router} from '@angular/router'; 
+import { AuthService } from '../auth/auth.services';
 @Component({
   selector: 'app-pregunta-form',
   templateUrl: './pregunta-form.component.html',
@@ -19,13 +20,22 @@ import {Router} from '@angular/router';
   `],
   providers:[PreguntaService]
 })
-export class PreguntaFormComponent {
+export class PreguntaFormComponent implements OnInit{
   icons: Object[] = icons; // mi array de icons para luego manejar en html
   constructor(
+    private authService : AuthService,
     private preguntaService : PreguntaService,
     private router: Router
     ){
 
+  }
+
+  ngOnInit(){
+    // verifico que este logueado el usuario para ver las respuesta a una pregunta..
+    if (!this.authService.estaLogueado()){
+      console.log('no esta logueado- pregunta-from');
+      this.router.navigateByUrl('/signin');
+    }
   }
 
   onSubmit(form : NgForm){
@@ -36,15 +46,15 @@ export class PreguntaFormComponent {
       new Date(),
       form.value.icon
     );
+    console.log(preg);
     // agregamo un pregunta..
     this.preguntaService.addPregunta(preg)
         .subscribe(
           ({_id})=>{
-            console.log(_id);
             // vamos a navegar a la ruta /preguntas y como paramentro _id
             this.router.navigate(['/preguntas',_id]);
           },
-          (error)=>{console.log(error)}
+          this.authService.handleError
         )
   }
   getVersionIcon(icon: any){

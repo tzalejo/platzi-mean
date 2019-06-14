@@ -7,13 +7,17 @@ import { Headers,Http,Response  } from '@angular/http'
 import { map } from 'rxjs/operators';
 import { Router } from '@angular/router';
 
-
+import {MatSnackBar} from '@angular/material/snack-bar';
 @Injectable()
 export class AuthService {
   usuarioUrl : string;
   clienteActual?: Usuario;
 
-  constructor(private http : Http,private router : Router){
+  constructor(
+    private http : Http,
+    private router : Router, 
+    public _snackBar: MatSnackBar)
+  {
     this.usuarioUrl=urljoin(environment.apiUrl,'auth');
     if (this.estaLogueado()){
       const {usuarioId,email,nombre,apellido} = JSON.parse(localStorage.getItem('usuario'));
@@ -72,12 +76,24 @@ export class AuthService {
   logout(){
     localStorage.clear();
     this.clienteActual= null;
-    this.router.navigateByUrl('/');
+    this.router.navigateByUrl('/signin');
   }
 
-  handleError(err: any){
-    const errMsg = err.message ? err.message :
-      err.status ? `${err.status} - ${err.statusText}` : `Server error`;
-    console.log(errMsg);
+  mostrarError(message){
+    // Simple message with an action.
+    this._snackBar.open(message, 'x',{duration:3000});
+  }
+
+  public handleError = (error: any)=>{
+    // console.log('la Variable error: ',JSON.parse(error._body) );
+    const {error: {name},message} = JSON.parse(error._body) ;
+    if(name === 'TokenExpiredError'){
+      this.mostrarError('Tu session ha expirado');
+    }else if(name === 'JsonWebTokenError'){
+      this.mostrarError('Ha habido un problema con tu sesión');
+    }else{
+      this.mostrarError(message || 'Ha ocurrido un error. Inténtalo de nuevo');
+    }
+    this.logout();
   }
 }

@@ -45,7 +45,8 @@ export class SignUpScreemComponent implements OnInit {
       this.authService.signup(usuario)
         .subscribe(
           this.authService.login,
-          error => console.log(error)
+          // error => console.log(error)
+          this.authService.handleError
         )
     }
   }

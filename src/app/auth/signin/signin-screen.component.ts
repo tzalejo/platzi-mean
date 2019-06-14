@@ -33,8 +33,8 @@ export class SigninScreemComponent implements OnInit {
       this.authService.signin(usuario)
         .subscribe(
           this.authService.login,
-          // this.authService.handleError
-          err => console.log(err)
+          this.authService.handleError
+          // err => console.log(err)
         );
     }
   }

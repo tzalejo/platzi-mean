@@ -29,8 +29,7 @@ export class PreguntaDetalleComponent implements OnInit{
         this.pregunta=pregunta;
         
         this.loading= false;
-      },this.preguntaService.handleError
-      )
+      })
   }
   ngOnDestroy(){
 
