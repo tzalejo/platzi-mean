@@ -1,16 +1,21 @@
 import express from 'express';
 import Debug from 'debug';
-import { findUsuarioByEmail ,crearToken, usuarios } from '../middleware/index';
-
+import { crearToken } from '../middleware/index';
+import {Usuario} from '../models';
+import {
+  hashSync as hash,
+  compareSync as comparaPassword
+} from 'bcryptjs';
 const app = express.Router();
 const debug = new Debug('platzi-overflow:routes/auth');
 
 // logueo
-app.post('/signin',(req,res,next)=>{
+app.post('/signin',async (req,res,next)=>{
   // cuando nos registremos, del body obtendremos el email y pass
   const {email, password}  = req.body;
-  const usuario = findUsuarioByEmail(email);
-
+  console.log({email, password} )
+  const usuario = await Usuario.findOne({email});
+  console.log(usuario);
   if(!usuario){
     debug(`Usuario con email ${email} no existe`);
     // para indica q el usuario no pudo logear
@@ -37,21 +42,21 @@ app.post('/signin',(req,res,next)=>{
 
 // registro
 // POST /api/auth/signup para salvar usuario..
-app.post('/signup',(req,res)=>{
+app.post('/signup',async (req,res)=>{
   // los parametro q me envias desde formulario de creacion, desde signup
   const {nombre, apellido,email,password} = req.body;
 
-  const usuario = {
-    _id: +new Date(),
+  const u  = new Usuario({
     nombre,
     apellido,
     email,
-    password
-  }
+    password: hash(password,10)
+  });
 
-  debug(`Creando el nuevo usuario: ${usuario.nombre}`);
-  // agregamos al array(por ahora..)
-  usuarios.push(usuario);
+  debug(`Creando el nuevo usuario: ${u}`);
+  // guardamos el usuario
+  const usuario = await u.save();
+
   // creamos el token
   const token = crearToken(usuario);
   // respondemos un 200 q se creo el usuario
@@ -64,12 +69,6 @@ app.post('/signup',(req,res)=>{
     email
   });
 });
-
-
-// compara pass,passcliente es la q ingreso el usuario y passUsu es la q realmente es.
-function comparaPassword(passwordCliente,passwordUsuario){
-  return passwordCliente === passwordUsuario;
-}
 
 function handlerFalloLogin(res,message){
   return res.status(401).json({

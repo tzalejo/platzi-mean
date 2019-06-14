@@ -11,7 +11,7 @@ var debug = require('debug')('platzi-overflow:root');
 
 // primero vamos a conectar a mongo
 async function start(){
-  await mongoose.connect(mongoUrl,{ useNewUrlParser: true });
+  await mongoose.connect(mongoUrl,{ useNewUrlParser: true, useCreateIndex: true });
   
   app.listen(PORT,()=>{
     debug(`Escuchando desde Servidor puerto ${PORT}`);

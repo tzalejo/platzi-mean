@@ -11,9 +11,3 @@ const UsuarioSchema = new Schema({
 UsuarioSchema.plugin(uniqueValidator);
 
 export default mongoose.model('Usuario',UsuarioSchema);
-// respuestas:[],
-// usuario:{
-//   nombre:'Alejnadro',
-//   apellido: 'Valenzuela',
-//   email: 'tzalejo@gmail.com',
-//   password:'123456
