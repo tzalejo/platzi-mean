@@ -6,7 +6,7 @@ const UsuarioSchema = new Schema({
   apellido: {type: String, required:true},
   email: {type: String, required:true, unique: true, index: true},
   password: {type: String, required:true}
-});
+},{ versionKey: false });
 // podemos validar ciertos cammpos, email que sea unicoo e indexarlo..
 UsuarioSchema.plugin(uniqueValidator);
 

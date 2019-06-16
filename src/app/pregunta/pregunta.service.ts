@@ -27,11 +27,10 @@ export class PreguntaService {
 
   getPregunta(id){
     const url = urljoin(this.preguntasUrl,id);
-    // console.log('Url en el servicio',url)
+    console.log('Url en el servicio getPreguntas',url)
     return this.http.get(url)
       .pipe(
         map(pregunta => {
-          // console.log('En el SErvicio',pregunta)
           return pregunta.json() as Pregunta;
         })
       );

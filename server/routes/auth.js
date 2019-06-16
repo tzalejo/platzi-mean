@@ -13,9 +13,9 @@ const debug = new Debug('platzi-overflow:routes/auth');
 app.post('/signin',async (req,res,next)=>{
   // cuando nos registremos, del body obtendremos el email y pass
   const {email, password}  = req.body;
-  console.log({email, password} )
+  // console.log({email, password} )
   const usuario = await Usuario.findOne({email});
-  console.log(usuario);
+  // console.log(usuario);
   if(!usuario){
     debug(`Usuario con email ${email} no existe`);
     // para indica q el usuario no pudo logear
