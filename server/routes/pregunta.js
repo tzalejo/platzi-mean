@@ -25,7 +25,9 @@ app.get('/:id',preguntaMiddleware,async (req,res)=>{
 // GET api/preguntas
 app.get('/',async (req,res)=>{
   try {
-    const preguntas = await pregunta.findAll()
+    const {sort} = req.query;
+    console.log(sort);
+    const preguntas = await pregunta.findAll(sort)
     res.status(200).json(preguntas);
   } catch (error) { 
     handleError('Un error ha ocurrido en obtener todas las preguntas',error,res);

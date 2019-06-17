@@ -1,9 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input} from '@angular/core';
 import { Pregunta } from './pregunta.model';
 import { PreguntaService } from './pregunta.service';
 
 @Component({
-  selector: 'app-pregunta-lista',
+  selector: 'pregunta-lista',
   templateUrl: './pregunta-lista.component.html',
   styles:[`
     i{
@@ -15,12 +15,6 @@ import { PreguntaService } from './pregunta.service';
       padding: 0 !important;
       font-size: 40px !important;
     }
-    .agregar-pregunta {
-      position: fixed;
-      bottom:30px;
-      right:30px;
-      font-size:30px;
-    }
     .loading-spinner{
       position:fixed
     }
@@ -28,6 +22,7 @@ import { PreguntaService } from './pregunta.service';
   providers:[PreguntaService]
 })
 export class PreguntaListaComponent implements OnInit {
+  @Input() sort;
   private loading : boolean;
   private preguntas: Pregunta[];
   constructor(private preguntaServicio: PreguntaService){
@@ -36,7 +31,8 @@ export class PreguntaListaComponent implements OnInit {
   }
   // cuando se monte este componente en pantalla, vamos a pedir las preguntas
   ngOnInit(){
-    this.preguntaServicio.getPreguntas()
+    console.log(this.sort);
+    this.preguntaServicio.getPreguntas(this.sort)
       .subscribe((preguntas: Pregunta[])=>{
         this.preguntas = preguntas;
         this.loading=false;

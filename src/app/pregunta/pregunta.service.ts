@@ -15,9 +15,9 @@ export class PreguntaService {
    }
   // el retorno de getPregunta: 
   // el retorno es una promesa que puede ser void(si es un error) o una array de pregunta
-  getPreguntas() {
+  getPreguntas(sort) {
     // el pedido http hacia el backend..con la direccion q esta en environment
-    return this.http.get(this.preguntasUrl)
+    return this.http.get(`${this.preguntasUrl}?sort=${sort}`)
       .pipe(
         map(respuestas => {
           return respuestas.json() as Pregunta[];

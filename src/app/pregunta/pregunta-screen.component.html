@@ -1,0 +1,9 @@
+<mat-tab-group>
+  <mat-tab label="Mas recientes">
+    <pregunta-lista sort="-fechaCreada" ></pregunta-lista>
+  </mat-tab>
+  <mat-tab label="Hot">
+    <pregunta-lista sort="-respuestas" ></pregunta-lista>
+  </mat-tab>
+</mat-tab-group>
+<button class="agregar-pregunta" mat-fab color="accent" [routerLink]="['preguntas/nueva']" routerLinkActive="router-link-active" >+</button>

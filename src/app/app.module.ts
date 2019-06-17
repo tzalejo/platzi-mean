@@ -18,8 +18,9 @@ import { SignUpScreemComponent }    from './auth/signup/signup-screem.component'
 import { PreguntaDetalleComponent } from './pregunta/pregunta-detalle.component';
 import { PreguntaListaComponent }   from './pregunta/pregunta-lista.component';
 import { PreguntaFormComponent }    from './pregunta/pregunta-form.component';
-import {RoutingModule} from './app.routing'
+import { PreguntaScreenComponent } from './pregunta/pregunta-screen.component';
 
+import {RoutingModule} from './app.routing'
 import { AuthService } from './auth/auth.services';
 @NgModule({
   declarations: [
@@ -29,7 +30,8 @@ import { AuthService } from './auth/auth.services';
     SigninScreemComponent,
     SignUpScreemComponent,
     PreguntaListaComponent,
-    PreguntaFormComponent
+    PreguntaFormComponent,
+    PreguntaScreenComponent
   ],
   imports: [
     BrowserModule,

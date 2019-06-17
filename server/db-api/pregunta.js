@@ -4,9 +4,9 @@ import Debug from 'debug';
 const debug = new Debug('platzi-overflow:db-api:preguntas');
 export default{
   // esto va hacer es pedir al modelo de preguntas todas las preguntas q encuentre en la bd
-  findAll: ()=>{ 
+  findAll: (sort)=>{ 
     debug('Encontrando todas las preguntas');
-    return Pregunta.find().populate('respuestas') // si no pasame ningun parametro trea todo..y si queres las pregun con las respuestas es el populate
+    return Pregunta.find().populate('respuestas').sort(sort) // si no pasame ningun parametro trea todo..y si queres las pregun con las respuestas es el populate
   },
   // busca en el modelo la pregunta = id 
   findById: (id)=>{
