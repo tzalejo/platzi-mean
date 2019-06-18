@@ -1,6 +1,7 @@
 import express from 'express';
 import bodyParser  from 'body-parser';
 import { pregunta,auth } from './routes';
+import path from 'path'
 const app = express();
 
 // para poder leer todo lo q  venga en formato json desde el cliente..
@@ -18,6 +19,10 @@ if (process.env.NODE_ENV==='development'){
     res.setHeader('Access-Control-Allow-Methods', 'POST, GET, PATCH, DELETE, OPTIONS');
     next();
   });
+}
+if(process.env.NODE_ENV === 'production'){
+  // cwd donde esta corriendo el servidor
+  app.use(express.static(path.join( process.cwd(),'dist/platzi-overflow' )));
 }
 app.use('/api/preguntas',pregunta);
 app.use('/api/auth',auth);

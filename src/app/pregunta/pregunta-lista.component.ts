@@ -23,7 +23,7 @@ import { PreguntaService } from './pregunta.service';
 })
 export class PreguntaListaComponent implements OnInit {
   @Input() sort;
-  private loading : boolean;
+  public loading : boolean;
   private preguntas: Pregunta[];
   constructor(private preguntaServicio: PreguntaService){
     this.preguntas=[];
@@ -31,7 +31,7 @@ export class PreguntaListaComponent implements OnInit {
   }
   // cuando se monte este componente en pantalla, vamos a pedir las preguntas
   ngOnInit(){
-    console.log(this.sort);
+    // console.log(this.sort);
     this.preguntaServicio.getPreguntas(this.sort)
       .subscribe((preguntas: Pregunta[])=>{
         this.preguntas = preguntas;

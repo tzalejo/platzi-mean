@@ -26,7 +26,7 @@ app.get('/:id',preguntaMiddleware,async (req,res)=>{
 app.get('/',async (req,res)=>{
   try {
     const {sort} = req.query;
-    console.log(sort);
+    // console.log(sort);
     const preguntas = await pregunta.findAll(sort)
     res.status(200).json(preguntas);
   } catch (error) { 

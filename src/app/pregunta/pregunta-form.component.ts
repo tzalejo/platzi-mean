@@ -33,7 +33,7 @@ export class PreguntaFormComponent implements OnInit{
   ngOnInit(){
     // verifico que este logueado el usuario para ver las respuesta a una pregunta..
     if (!this.authService.estaLogueado()){
-      console.log('no esta logueado- pregunta-from');
+      // console.log('no esta logueado- pregunta-from');
       this.router.navigateByUrl('/signin');
     }
   }
@@ -46,7 +46,7 @@ export class PreguntaFormComponent implements OnInit{
       new Date(),
       form.value.icon
     );
-    console.log(preg);
+    // console.log(preg);
     // agregamo un pregunta..
     this.preguntaService.addPregunta(preg)
         .subscribe(

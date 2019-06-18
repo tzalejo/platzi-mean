@@ -11,5 +11,5 @@ const presets = [
     },
   ],
 ];
-
-module.exports = { presets };
+const plugins = ["transform-async-to-generator"];
+module.exports = { presets, plugins };
